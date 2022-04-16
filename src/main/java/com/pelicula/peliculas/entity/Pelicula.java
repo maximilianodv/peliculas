@@ -1,8 +1,6 @@
 package com.pelicula.peliculas.entity;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,8 +8,7 @@ import java.util.List;
 
 @Entity(name = "Pelicula")
 @Table(name = "pelicula")
-@Getter
-@Setter
+@Data
 public class Pelicula {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
@@ -41,5 +38,12 @@ public class Pelicula {
 
     @Column(name="pathVideo")
     private String pathVideo;
+
+	@Override
+	public String toString() {
+		return "Pelicula [idPelicula=" + idPelicula + ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", fechaAlta=" + fechaAlta + ", fechaBaja=" + fechaBaja + ", fechaModificacion=" + fechaModificacion
+				+ ", status=" + status + ", caratula=" + caratula + ", pathVideo=" + pathVideo + "]";
+	}
 
 }

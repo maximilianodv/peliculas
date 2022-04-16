@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pelicula.peliculas.repository.CategorizeRepository;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/pelicula")
@@ -38,13 +35,18 @@ public class ControllerPeliculas {
     CategorizeRepository catRep;
 
     @RequestMapping(value = "/save",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    public ResponseEntity<CategoriaPelicula> save(@RequestBody CategoriaPelicula catpelicula){
-//        TransactionStatus transaction = this.transactionManager.getTransaction(null);
-        try {
-          
+    public ResponseEntity<PeliculaCategoriasList> save(@RequestBody PeliculaCategoriasList catpelicula){
 
-        	catPelRp.save(catpelicula);
-            //this.transactionManager.commit(transaction);
+        try {
+        Pelicula pelicula=pr.save(catpelicula.getPelicula());
+            catpelicula.getCategoria().forEach((cat)->{
+            CategoriaPelicula categoria=new CategoriaPelicula();
+            categoria.setPelicula(pelicula);
+            Categoria cyy=catRep.findById(cat.getIdCategoria()).get();
+            System.out.println(cyy);
+            categoria.setCategorias(cyy);
+            catPelRp.save(categoria);
+            });
         }
         catch (Exception e){
             return new ResponseEntity("Error"+e.getMessage(),HttpStatus.valueOf(400));
@@ -55,8 +57,19 @@ public class ControllerPeliculas {
 
     @RequestMapping(value = "/update",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     public ResponseEntity<PeliculaCategoriasList> update(@RequestBody PeliculaCategoriasList update){
-        Pelicula newP=update.getPelicula();
-
+        try {
+            Pelicula pelicula=pr.save(update.getPelicula());
+            update.getCategoria().forEach((cat)->{
+                CategoriaPelicula categoria=new CategoriaPelicula();
+                categoria.setPelicula(pelicula);
+                Categoria categoriaFind=catRep.findById(cat.getIdCategoria()).get();
+                categoria.setCategorias(categoriaFind);
+                catPelRp.save(categoria);
+            });
+        }
+        catch (Exception e){
+            return new ResponseEntity("Error"+e.getMessage(),HttpStatus.valueOf(400));
+        }
         return  ResponseEntity.ok(update);
     }
 

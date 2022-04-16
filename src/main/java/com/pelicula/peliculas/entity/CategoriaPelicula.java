@@ -1,14 +1,14 @@
 package com.pelicula.peliculas.entity;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity(name = "CategoriaPelicula")
 @Table(name = "categoria_pelicula")
+@Data
 public class CategoriaPelicula {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -16,36 +16,13 @@ public class CategoriaPelicula {
     private long idCategoriaPelicula;
 
     @ManyToOne(cascade = CascadeType.ALL,targetEntity=Pelicula.class)
-    @JoinColumn(name="id_pelicula")
+    @JoinColumn(name="id_pelicula",referencedColumnName = "id_pelicula")
     private Pelicula pelicula;
 
     @ManyToOne(fetch =FetchType.LAZY,cascade = CascadeType.ALL,targetEntity=Categoria.class)
-    @JoinColumn(name="id_categoria",nullable = false)
-    private List<Categoria> categorias;
-
-	public long getIdCategoriaPelicula() {
-		return idCategoriaPelicula;
-	}
-
-	public void setIdCategoriaPelicula(long idCategoriaPelicula) {
-		this.idCategoriaPelicula = idCategoriaPelicula;
-	}
-
-	public Pelicula getPelicula() {
-		return pelicula;
-	}
-
-	public void setPelicula(Pelicula pelicula) {
-		this.pelicula = pelicula;
-	}
-
-	public List<Categoria> getCategorias() {
-		return categorias;
-	}
-
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
-	}
+    @JoinColumn(name="id_categoria",referencedColumnName = "id_categoria")
+//    private List<Categoria> categorias =new ArrayList<Categoria>();
+    private Categoria categorias;
     
-   
+    
 }

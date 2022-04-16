@@ -1,32 +1,20 @@
 package com.pelicula.peliculas.entity;
 
-import java.util.List;
+import lombok.Data;
 
+import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.List;
+@Data
 public class PeliculaCategoriasList {
     private Pelicula pelicula;
-    private List<Categoria> categorias;
-
-    public Pelicula getPelicula() {
-        return pelicula;
-    }
-
-    public void setPelicula(Pelicula pelicula) {
-        this.pelicula = pelicula;
-    }
-
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
-
-    public void setCategoria(List<Categoria> categoria) {
-        this.categorias = categoria;
-    }
+    private List<Categoria> categoria=new ArrayList<Categoria>();
 
     @Override
     public String toString() {
         return "PeliculaCategoriasList{" +
                 "pelicula=" + pelicula +
-                ", categoria=" + categorias +
+                ", categorias=" + categoria +
                 '}';
     }
 }
