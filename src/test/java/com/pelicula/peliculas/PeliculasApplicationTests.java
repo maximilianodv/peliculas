@@ -10,15 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootTest
 class PeliculasApplicationTests {
 	@Autowired
 	private UsuarioRepository repoUser;
-	@Autowired
-	private BCryptPasswordEncoder encoder;
-
 	@Autowired
 	UsuarioRepository r;
 
