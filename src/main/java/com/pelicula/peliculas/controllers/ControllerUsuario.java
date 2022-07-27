@@ -1,5 +1,6 @@
 package com.pelicula.peliculas.controllers;
 
+import com.pelicula.peliculas.dao.UserDataLogin;
 import com.pelicula.peliculas.entity.*;
 import com.pelicula.peliculas.repository.UsuarioRepository;
 import com.pelicula.peliculas.utils.Encript;
@@ -33,7 +34,8 @@ public class ControllerUsuario {
     private JWTUtil jwtUtil;
 
     @RequestMapping(value = "/login",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    public ResponseEntity<TokenUser> login(@RequestBody Usuario usuarioIn){
+    public ResponseEntity<TokenUser> login(@RequestBody UserDataLogin usuarioIn){
+
         Usuario usuario1;
         TokenUser tokenUser = new TokenUser();
         try {
@@ -82,7 +84,7 @@ public class ControllerUsuario {
         return  ResponseEntity.ok(usuarioReg);
     }
     private String getJWTToken(String username) {
-        String secretKey = "mySecretKey";
+      /*String secretKey = "mySecretKey";
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_USER");
 
@@ -100,6 +102,7 @@ public class ControllerUsuario {
                         secretKey.getBytes()).compact();
 
         return "Bearer " + token;
-
+*/
+        return null;
     }
 }

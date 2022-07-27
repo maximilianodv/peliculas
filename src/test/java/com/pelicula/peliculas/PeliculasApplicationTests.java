@@ -41,7 +41,7 @@ class PeliculasApplicationTests {
 		}*/
 
 	}
-	@Test
+	/*@Test
 	void contextLogi(){
 		Usuario usuarioIn=new Usuario();
 		usuarioIn.setPassword("123456789");
@@ -66,6 +66,6 @@ class PeliculasApplicationTests {
 
 		}
 
-	}
+	}*/
 
 }

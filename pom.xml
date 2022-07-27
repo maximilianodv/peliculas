@@ -11,7 +11,7 @@
 	<groupId>com.pelicula</groupId>
 	<artifactId>peliculas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>peliculas</name>
 	<description>demo para peliculas</description>
 	<properties>
