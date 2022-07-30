@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -32,7 +29,7 @@ public class ControllerUsuario {
 
     @Autowired
     private JWTUtil jwtUtil;
-
+    @CrossOrigin(origins ="http://192.168.0.24:8080/")
     @RequestMapping(value = "/login",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     public ResponseEntity<TokenUser> login(@RequestBody UserDataLogin usuarioIn){
 
